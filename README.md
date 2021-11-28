@@ -34,3 +34,36 @@ Reads from STRATS to see which strat is active (should only be one, else firt)
 1. Mark STRATS as completed for asset
 2. Send USDT to MAIN
 3. If STRATS exists strats not touched yet, go to (2), else finish program. 
+
+## Strats
+- `finished` if all strats are expended
+- `long` either the pair longing or None
+- `main` is binance margin account to store USDT when not in use
+- `pair[strats['long']]` 
+    - ['pos'] is the position of the `long` pair. 0 is default--have not bought, waiting. 1 is have bought and looking to sell. -1 is finished.
+    - ['price'] is the buy price   
+    - ['tp'] 
+        - ['pos'] is 0 if did not take take-profit yet. 1 if already did
+        - ['pct'] is take profit level price*(1+pct)
+        - ['amt'] is amount of position to take profit. 0.3 == 30%
+    - ['sl'] 
+        - ['pos'] is 0 if did not take stop-loss yet. 1 if already did
+        - ['pct'] is stop-loss level price*(1-pct)
+    - ['early'] 
+        - ['pos'] is 0 if did not sell early yet, 1 if did sell early
+        - ['time'] is time of early time limit
+        - ['amt'] is amount to sell 
+    - ['late'] 
+        - ['pos'] is 0 if did not sell late yet, 1 if did sell late
+        - ['time'] is time of late time limit
+        - ['amt'] is amount to sell 
+    
+
+## Warnings:
+- check if it takes time to init a binance client given imports done
+
+## Uhhh
+- Centrifuge CFG
+- TrueFi TRU
+- Goldfinch
+- 
