@@ -24,6 +24,17 @@ def save_strat(strat):
     with open(STRATS, 'w') as f:
         json.dump(strat, f, indent=4)
 
+def proofread_strat(strats):
+    """
+    proofreads strat and makes sure everything is in agreement, no contradictions in the json file
+    ie, if all strats have -1, then change file to finished
+    """
+    if strats['pair']: #Not empty
+        strats['finished'] = 0 if (False in list(map(lambda x: strats['pair'][x]['pos']==-1, strats['pair']))) else 1
+    else: strats['finished'] = 1
+    if finished: strat['long'] = None
+    return strats
+
 def json_editor():
     """
     if ran as a script, provides terminal interface to edit strats
@@ -47,8 +58,6 @@ def init_strats(strats):
     except: strats['finished'] = 0
     try: strats['long']
     except: strats['long'] = None
-    try: strats['main']
-    except: strats['main'] = 'BTCUSDT'
     try: strats['pair']
     except: strats['pair'] = {}
     save_strat(strats)
@@ -101,9 +110,7 @@ def delete_strat(strats):
     else:
         print(f"Strat {strat} does not exist")
 
-    if strats['pair']: #Not empty
-        strats['finished'] = 0 if (False in list(map(lambda x: x['pos']==-1, strats['pair']))) else 1
-    else: strats['finished'] = 1
+    strats = proofread_strat(strats)
     save_strat(strats)
 
 if __name__ == "__main__":

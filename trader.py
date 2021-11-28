@@ -1,7 +1,7 @@
-import pandas as pd
-import numpy as np
-from strategy import read_strat, save_strat
+from strategy import read_strat, save_strat, proofread_strat
+from binance.enums import * #https://github.com/sammchardy/python-binance/blob/master/binance/enums.py
 import binance_helpers as bh
+import time
 
 def trade(strats, interval=10):
     """
@@ -10,8 +10,8 @@ def trade(strats, interval=10):
     pass in strats if can guarantee latest version
     interval is sleep time before checking prices + orders
     """
-
-    if strats['long'] = None: return
+    print("trader: trade")
+    if strats['long'] == None: return
     client = bh.new_binance_client()
 
     # If did not transfer money from main to new strats['long'] position, do that and then go full on margin and buy. This is the only
@@ -24,7 +24,10 @@ def trade(strats, interval=10):
         price = transfer_and_buy(client, strats['long'])
         strats = update_strats_with_order(strats, price)
 
+    long_asset = strats['long'] #Do not delete, because setting to null 
     while (strats['long'] != None):
+
+        print("trader: while-loop")
         time.sleep(interval)
         pair = strats['pair'][strats['long']]
         if pair['pos'] != 1: return
@@ -36,29 +39,33 @@ def trade(strats, interval=10):
         if (pair['tp']['pos']==0 and price>pair['tp']['pct']): #first time reaching tp
             liquidate(client, strat['long'], pair['tp']['amt'])
             strats['pair'][strats['long']]['tp']['pos'] = 1
+            if pair['tp']['amt'] == 1: 
+                strats['pair'][strats['long']]['pos'] = -1
+                strats['long'] = None
         if (pair['sl']['pos']==0 and price<pair['sl']['pct']): #Hit stop loss, liquidate everything
             # Sell everything
             liquidate(client, strat['long'], 1)
             strats['pair'][strats['long']]['sl']['pos'] = 1
+            strats['pair'][strats['long']]['pos'] = -1
             strats['long'] = None
         if (pair['early']['pos']==0 and now>pair['early']['time']):
             # Sell everything for long, then break
-            liquidate(client, strat['long'], pair['early']['amt'])
+            liquidate(client, strats['long'], pair['early']['amt'])
             strats['pair'][strats['long']]['early']['pos'] = 1
+            if pair['early']['amt'] == 1: 
+                strats['pair'][strats['long']]['pos'] = -1
+                strats['long'] = None
         if (pair['late']['pos']==0 and now>pair['late']['time']):
             # Sell everything for long, then break
-            liquidate(client, strat['long'], pair['late']['amt'])
+            liquidate(client, strats['long'], pair['late']['amt'])
             strats['pair'][strats['long']]['late']['pos'] = 1
+            strats['pair'][strats['long']]['pos'] = -1
             strats['long'] = None
 
         save_strat(strats)
-    strats['pair'][strats['long']]['pos'] = -1
-
-
-        
-
-
-    # If there is very little
+    strats = proofread_strat(strats)
+    save_strat(strats)
+    return strats 
 
 
 def transfer_and_buy(client, pair):
@@ -67,6 +74,8 @@ def transfer_and_buy(client, pair):
     puts in maximum buy order in new for asset
     returns order
     """
+
+    print(f"trader: transfer_and_buy {pair}")
     symbol = pair[:-4]
     usdt_spot_free = client.get_asset_balance(asset='USDT')['free']
     client.transfer_spot_to_isolated_margin(asset='USDT', symbol=pair, amount=usdt_spot_free)
@@ -114,6 +123,7 @@ def liquidate(client, pair, pct):
     liquidates pct (0, 1.0] of the entire portfolio given pair. Does not transfer back to spot unless 1.0 is liquidated
     """
 
+    print(f"trader: liquidate {pct*100}% of {pair} position")
     symbol = pair[:-4]
     dp = bh.get_decimal_place(client, pair)
     m = client.get_isolated_margin_account()
@@ -129,14 +139,15 @@ def liquidate(client, pair, pct):
         isIsolated='TRUE')
 
     m = client.get_isolated_margin_account()
-    m = list(filter(lambda x: x['baseAsset']['asset'] == 'BTC' and x['quoteAsset']['asset'] == 'USDT', m['assets']))[0]
+    m = list(filter(lambda x: x['baseAsset']['asset'] == symbol and x['quoteAsset']['asset'] == 'USDT', m['assets']))[0]
     f = m['quoteAsset']['free']
     b = float(m['quoteAsset']['borrowed'])
     if b!=0:  client.repay_margin_loan(asset='USDT', amount=f, symbol=pair, isIsolated='TRUE')
 
-    if pct=1: 
+    if pct==1: 
+        print("trader: transfer funds back to spot")
         m = client.get_isolated_margin_account()
-        m = list(filter(lambda x: x['baseAsset']['asset'] == 'BTC' and x['quoteAsset']['asset'] == 'USDT', m['assets']))[0]
+        m = list(filter(lambda x: x['baseAsset']['asset'] == symbol and x['quoteAsset']['asset'] == 'USDT', m['assets']))[0]
         tamt = m['quoteAsset']['free']
         bamt = m['baseAsset']['free']
         client.transfer_isolated_margin_to_spot(asset='USDT', symbol=pair, amount=tamt)

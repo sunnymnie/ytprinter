@@ -1,19 +1,17 @@
-import pandas as pd
 from strategy import read_strat
 import youtube_checker as yc
 import trader
 
 def main():
     # Update STRATS
+    print("Starting printer...")
     strats = read_strat()
     while strats["finished"] == 0:
-        # there are still some strats that need to be done/awaiting
-        # Do code to await. Await will return imediately if position is already long
+        print("Waiting for post...")
         strats = yc.await_for_post(strats)
-        # Next up is looping checking if price and taking profit if needed
-        trader.trade(strats)
-
-        strats = read_strat()
+        print(f"Now trading {strats['long']}...")
+        strats = trader.trade(strats)
+        print("Finished trading...")
     print(f"Printer finished successfully")
 
 

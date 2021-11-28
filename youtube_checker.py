@@ -1,5 +1,3 @@
-import pandas as pd
-import numpy as np
 from strategy import read_strat, save_strat
 import time
 import json
@@ -19,11 +17,12 @@ def await_for_post(strats = None):
     """
     if strats==None: strats = read_strat()
     while strats['long'] == None:
-        time.sleep(interval)
         hour = datetime.datetime.now(datetime.timezone(datetime.timedelta(0))).hour
         if hour<14: interval = 30
         if (hour == 15): interval=2
         else: interval = 5
+
+        time.sleep(interval)
 
         strats = check_post(strats)
     return strats
@@ -38,7 +37,8 @@ def check_post(strats):
     if 'news' in title: return strats
 
     for strat in strats['pair']:
-        for keyword in strats['pair'][strat]['keyword']:
+        if strats['pair'][strat]['pos'] != 0: continue
+        for keyword in strats['pair'][strat]['keywords']:
             if keyword in title:
                 strats['long'] = strat
                 save_strat(strats)
