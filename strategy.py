@@ -73,11 +73,11 @@ def add_strat(strats):
         else:
             keywords.append(word)
             print(f"Keywords: {keywords}")
-    tp = {'pos':0, 'pct':None, 'amt':None}
-    sl = {'pos':0, 'pct':None}
-    early = {'pos':0, 'time':None, 'amt':None}
-    late = {'pos':0, 'time':None, 'amt':None}
-    strats['pair'][asset] = {'pos':0, 'price':None, 'keywords':keywords, 'tp':tp, 'sl':sl, 'early':early, 'late':late}
+    tp = {'pos':0, 'pct':1.05, 'amt':0.3}
+    sl = {'pos':0, 'pct':0.995}
+    early = {'pos':0, 'time':60*60, 'amt':0.5}
+    late = {'pos':0, 'time':3*60*60, 'amt':1.0}
+    strats['pair'][asset] = {'pos':0, 'keywords':keywords, 'tp':tp, 'sl':sl, 'early':early, 'late':late}
     strats['finished'] = 0
     save_strat(strats)
     print(f"{asset} strat successfully added")

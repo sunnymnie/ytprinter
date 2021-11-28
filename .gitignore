@@ -3,6 +3,10 @@
 **/data
 **/models
 
+# Vim swap files
+*.swp
+*.swo
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
