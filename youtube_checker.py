@@ -45,6 +45,13 @@ def check_post(strats):
 
     return strats
 
+def str_to_list(s):
+    """
+    Converts string title to list of words, removing anything except letters and numbers
+    """
+    def valid_character(c):
+        return c.isalpha() or c==" " or c.isnumeric()
+    return ''.join(filter(valid_character, s)).split()
 
 def get_latest_video_title():
     """
@@ -55,7 +62,9 @@ def get_latest_video_title():
     """
     url = f'https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUqK_GSMbpiV8spgD3ZGloSw&key={API}&part=snippet&maxResults=1'
     response = requests.get(url)
-    return response.json()['items'][0]['snippet']['title'].lower()
+    title = response.json()['items'][0]['snippet']['title'].lower()
+    return str_to_list(title)
+
 
 
 
