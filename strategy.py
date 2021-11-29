@@ -32,7 +32,7 @@ def proofread_strat(strats):
     if strats['pair']: #Not empty
         strats['finished'] = 0 if (False in list(map(lambda x: strats['pair'][x]['pos']==-1, strats['pair']))) else 1
     else: strats['finished'] = 1
-    if finished: strat['long'] = None
+    if strats['finished']: strat['long'] = None
     return strats
 
 def json_editor():
@@ -66,8 +66,21 @@ def view_all_strats(strats):
     """
     views all strats. Throws errors if not properly initalized
     """
+    print("="*60)
+    print(f"Finished = {strats['finished']}")
+    print(f"Long     = {strats['long']}")
     for strat in strats['pair']:
-        print(f"{strat}: {strats['pair'][strat]}")
+        info = strats['pair'][strat]
+        print("~"*60)
+        print(f"{strat}: pos = {info['pos']}")
+        print("Keywords:")
+        for keyword in info['keywords']:
+            print(f"- {keyword}")
+
+        print(f"tp:     pos = {info['tp']['pos']}         pct = {info['tp']['pct']}           amt = {info['tp']['amt']}")
+        print(f"sl:     pos = {info['sl']['pos']}         pct = {info['sl']['pct']}")
+        print(f"early:  pos = {info['early']['pos']}         time = {int(info['early']['time']/60)} min         amt = {info['early']['amt']}")
+        print(f"late:   pos = {info['late']['pos']}         time = {int(info['late']['time']/60)} min")
 
 def add_strat(strats):
     """
@@ -82,10 +95,16 @@ def add_strat(strats):
         else:
             keywords.append(word)
             print(f"Keywords: {keywords}")
-    tp = {'pos':0, 'pct':1.05, 'amt':0.3}
-    sl = {'pos':0, 'pct':0.995}
-    early = {'pos':0, 'time':60*60, 'amt':0.5}
-    late = {'pos':0, 'time':3*60*60, 'amt':1.0}
+    tp_pct = float(input("Enter take profit price multiple (default 1.05)\n"))
+    tp_amt = float(input("Enter take profit amount (default 0.3)\n"))
+    sl_pct = float(input("Enter stop loss price multiple (default 0.995)\n"))
+    early_time = int(input("Enter whole minutes for early time-stop (default 60)\n"))*60
+    early_amt = float(input("Enter early time-stop amount (default 0.5)\n"))
+    late_time = int(input("Enter whole minutes for late time-stop (default 180)\n"))*60
+    tp = {'pos':0, 'pct':tp_pct, 'amt':tp_amt}
+    sl = {'pos':0, 'pct':sl_pct}
+    early = {'pos':0, 'time':early_time, 'amt':early_amt}
+    late = {'pos':0, 'time':late_time, 'amt':1.0}
     strats['pair'][asset] = {'pos':0, 'keywords':keywords, 'tp':tp, 'sl':sl, 'early':early, 'late':late}
     strats['finished'] = 0
     save_strat(strats)
