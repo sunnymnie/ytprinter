@@ -19,7 +19,7 @@ def await_for_post(strats = None):
     while strats['long'] == None:
         hour = datetime.datetime.now(datetime.timezone(datetime.timedelta(0))).hour
         if hour<14: interval = 30
-        if (hour == 15): interval=2
+        elif (hour == 15): interval=2
         else: interval = 5
 
         time.sleep(interval)
