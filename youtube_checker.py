@@ -9,6 +9,7 @@ import datetime
 
 STRATS = None
 API = keys.key('youtube', 'api')
+TITLE = []
 
 def await_for_post(strats = None):
     """
@@ -24,7 +25,8 @@ def await_for_post(strats = None):
         else: interval = 1
         time.sleep(interval)
         i = i+1 if i+1<len(API) else 0
-        strats = check_post(strats, API[i])
+        try: strats = check_post(strats, API[i])
+        except: print(f"Error in checking YT with api [{i}] at time {get_current_time()}")
     return strats
     
 
@@ -63,8 +65,15 @@ def get_latest_video_title(api):
     url = f'https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUqK_GSMbpiV8spgD3ZGloSw&key={api}&part=snippet&maxResults=1'
     response = requests.get(url)
     title = response.json()['items'][0]['snippet']['title'].lower()
+    if title != TITLE: 
+        TITLE = title
+        print(f"New video detected at: {get_current_time()}")
     return str_to_list(title)
 
 
-
+def get_current_time():
+    """
+    returns the current time PDT as string
+    """
+    return datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-8))).strftime("%H:%M:%S")
 
