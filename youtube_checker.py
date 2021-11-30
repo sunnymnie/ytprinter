@@ -25,8 +25,8 @@ def await_for_post(strats = None):
         else: interval = 1
         time.sleep(interval)
         i = i+1 if i+1<len(API) else 0
-        try: strats = check_post(strats, API[i])
-        except: print(f"Error in checking YT with api [{i}] at time {get_current_time()}")
+         try: strats = check_post(strats, API[i])
+         except: print(f"Error in checking YT with api [{i}] at time {get_current_time()}")
     return strats
     
 
@@ -62,6 +62,7 @@ def get_latest_video_title(api):
     For information: https://stackoverflow.com/questions/18953499/youtube-api-to-fetch-all-videos-on-a-channel
     answer by virtualmic
     """
+    global TITLE
     url = f'https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUqK_GSMbpiV8spgD3ZGloSw&key={api}&part=snippet&maxResults=1'
     response = requests.get(url)
     title = response.json()['items'][0]['snippet']['title'].lower()
