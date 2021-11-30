@@ -25,8 +25,8 @@ def await_for_post(strats = None):
         else: interval = 1
         time.sleep(interval)
         i = i+1 if i+1<len(API) else 0
-         try: strats = check_post(strats, API[i])
-         except: print(f"Error in checking YT with api [{i}] at time {get_current_time()}")
+        try: strats = check_post(strats, API[i])
+        except: print(f"Error in checking YT with api [{i}] at time {get_current_time()}")
     return strats
     
 
