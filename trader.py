@@ -3,7 +3,7 @@ from binance.enums import * #https://github.com/sammchardy/python-binance/blob/m
 import binance_helpers as bh
 import time
 
-def trade(strats, interval=10):
+def trade(strats, interval=1):
     """
     transfers funds to designated margin account, puts in trade, applies stop loss, sells given constraints in strat (5%, 1hr, 3hr). Updates and saves strats when necessary
 
@@ -37,7 +37,7 @@ def trade(strats, interval=10):
         now = time.time()
 
         if (pair['tp']['pos']==0 and price>pair['tp']['pct']): #first time reaching tp
-            liquidate(client, strat['long'], pair['tp']['amt'])
+            liquidate(client, strats['long'], pair['tp']['amt'])
             strats['pair'][strats['long']]['tp']['pos'] = 1
             if pair['tp']['amt'] == 1: 
                 strats['pair'][strats['long']]['pos'] = -1
