@@ -2,6 +2,21 @@
 
 ## Buy immediately upon Coin Bureau's video launch
 
+## TODO:
+- Decouple trader.py to trader.py and portfolio_manager.py.
+    - trader: can initialize margin buys/sells, transfers, future trading. 
+    - portfolio_manager: calls trader at the right times. Is in charge of logistics and interfacing with strats.json. 
+- strats.json: keeps track of current margin portfolio as well. 
+- rename youtube_checker to strategy_manager. 
+- in strategy_manager, every time api list reaches end, instead of sleeping for x seconds, call portfolio_manager to do update on saving most recent % of portfolio + updating client 
+
+## SMALL TODOs:
+- If in portfolio_manager, put try catch on trader, if trader fails, refresh client, fetch state in portfolio_manager (updates strats to be same as information on binance), then calls trader again
+- In strategy strats set leverage to use
+- In strategy after a strat is submitted, print a summary (max loss, tp, sl, time stops,etc)
+- Discord capabilities. messenger.py
+
+# Past notes:
 ## Runtime cycle
 ### 1. Initalize
 1. Checking if waiting for CB to post (cross margin account != 0), or what asset is long. Set value to long
