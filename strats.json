@@ -2,11 +2,12 @@
     "finished": 0,
     "long": null,
     "pair": {
-        "ETHUSDT": {
+        "MATICUSDT": {
             "pos": 0,
-            "leverage": 3,
+            "leverage": 20,
             "keywords": [
-                "omegadelta"
+                "matic",
+                "polygon"
             ],
             "tp": {
                 "pos": 0,
@@ -19,20 +20,79 @@
             },
             "early": {
                 "pos": 0,
-                "time": 9600,
+                "time": 8700,
                 "amt": 1.0
             },
             "late": {
                 "pos": 0,
-                "time": 10200,
+                "time": 9000,
+                "amt": 1.0
+            }
+        },
+        "NEARUSDT": {
+            "pos": 0,
+            "leverage": 20,
+            "keywords": [
+                "near"
+            ],
+            "tp": {
+                "pos": 0,
+                "pct": 99.0,
+                "amt": 1.0
+            },
+            "sl": {
+                "pos": 0,
+                "pct": 0.99
+            },
+            "early": {
+                "pos": 0,
+                "time": 8700,
+                "amt": 1.0
+            },
+            "late": {
+                "pos": 0,
+                "time": 9000,
                 "amt": 1.0
             }
         }
     },
-    "portfolio": [],
-    "leverage": 0.9,
+    "portfolio": [
+        {
+            "asset": "USDT",
+            "free": 4.36020306,
+            "locked": 0.0,
+            "borrowed": 0.0,
+            "interest": 0.0,
+            "netAsset": 4.36020306
+        },
+        {
+            "asset": "ATOM",
+            "free": 0.509592,
+            "locked": 0.0,
+            "borrowed": 0.0,
+            "interest": 0.0,
+            "netAsset": 0.509592
+        },
+        {
+            "asset": "ZEC",
+            "free": 7.8e-06,
+            "locked": 0.0,
+            "borrowed": 0.0,
+            "interest": 0.0,
+            "netAsset": 7.8e-06
+        },
+        {
+            "asset": "XMR",
+            "free": 1.892e-05,
+            "locked": 0.0,
+            "borrowed": 0.0,
+            "interest": 0.0,
+            "netAsset": 1.892e-05
+        }
+    ],
+    "leverage": 0.8,
     "api_quotas": [
-        9015,
+        8902,
         9082,
         8599,
         9158,

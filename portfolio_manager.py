@@ -3,6 +3,7 @@ from binance.enums import * #https://github.com/sammchardy/python-binance/blob/m
 import time
 import trader as t
 import datetime
+import binance_helpers as bh
 
 def manage_position(strats, interval = 1):
     """
@@ -11,7 +12,7 @@ def manage_position(strats, interval = 1):
     pass in strats if can guarantee latest version
     interval is sleep time before checking prices + orders
     """
-    print("Portfolio manager activated")
+    print(f"Portfolio manager activated at {datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-8))).strftime('%H:%M:%S')}")
     if strats['long'] == None: return
     client = bh.new_binance_client()
 
@@ -87,6 +88,7 @@ def init_previous_portfolio(strats):
     """
     inits previous portfolio with 'leverage' amount of assets
     """
+    client = bh.new_binance_client()
     total = 0
     for pair in strats['portfolio']:
         if pair['asset'] == 'USDT': continue
@@ -101,7 +103,8 @@ def init_previous_portfolio(strats):
         if pair['asset'] == 'USDT': continue
         pct = pair['free']/total
         amt = pct*usdt
-        t.cross_margin_long_trade(client, f"{pair['asset']}USDT", amt)
+        try: t.cross_margin_long_trade(client, f"{pair['asset']}USDT", amt)
+        except: print(f"Warning: unable to buy {amt} {pair['asset']}USDT")
     print(f"Successfully init previous portfolio at {datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-8))).strftime('%H:%M:%S')}")
 
 

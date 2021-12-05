@@ -42,11 +42,12 @@ def json_editor():
     active = True
     while active:
         strats = read_strat()
-        cmd = input("Type [v] to view all strats, [a] to add strat, [d] to delete strat, [i] to init strats, [q] to quit\n")
+        cmd = input("Type [v] to view all strats, [a] to add strat, [d] to delete strat, [l] to edit leverage, [i] to init strats, [q] to quit\n")
         if (cmd.lower() == "v"): view_all_strats(strats)
         elif (cmd.lower() == "i"): init_strats(strats)
         elif (cmd.lower() == "a"): add_strat(strats)
         elif (cmd.lower() == "d"): delete_strat(strats)
+        elif (cmd.lower() == "l"): edit_leverage(strats)
         elif (cmd.lower() == "q"): active = False
         else: print("Invalid command...")
 
@@ -119,6 +120,14 @@ def add_strat(strats):
     save_strat(strats)
     print(f"{asset} strat successfully added")
 
+def edit_leverage(strats):
+    """
+    prompts user to edit leverage allocated to margin portfolio
+    """
+    lev = float(input(f"Enter new amount of leverage. Current leverage: {strats['leverage']}\n"))
+    strats['leverage'] = lev
+    save_strat(strats)
+    print(f"Leverage set successfully to {strats['leverage']}")
 
 
 def delete_strat(strats):

@@ -116,7 +116,7 @@ def _margin_order(client, pair, side, amt, isolated='FALSE'):
     - amt: float
     - isolated: default 'FALSE', 'TRUE' for isolated margin. 
     """
-    dp = hb.get_decimal_place(client, pair)
+    dp = bh.get_decimal_place(client, pair)
     amt = bh.binance_floor(float(amt), dp)
     order = client.create_margin_order(
         symbol=pair,

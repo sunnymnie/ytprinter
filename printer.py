@@ -13,6 +13,7 @@ def main():
         print(f"Now trading {strats['long']}...")
         # strats = trader.trade(strats)
         strats = pm.manage_position(strats)
+        pm.init_previous_portfolio(strats)
         print("Finished trading...")
     print(f"Printer finished successfully")
 
