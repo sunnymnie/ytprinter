@@ -2,6 +2,12 @@ from binance.client import Client
 import math
 from keys import key
 
+def get_futures_precision(client, pair):
+    info = client.futures_exchange_info()
+    for x in info['symbols']:
+        if x['symbol'] == pair:
+            return x['quantityPrecision']
+
 def binance_ceil(x:float, dp:float):
     """returns the ceil to dp decimal places (to payback borrowed amounts). Includes 0.1% trading fee"""
     return math.ceil(x*1.001*(10 ** dp))/(10 ** dp)

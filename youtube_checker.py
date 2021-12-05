@@ -4,6 +4,7 @@ import json
 import keys
 import requests
 import datetime
+import random
 
 # Import Youtube api stuff
 
@@ -17,18 +18,29 @@ def await_for_post(strats = None):
     interval is sleep time between polling check
     """
     if strats==None: strats = read_strat()
-    i = -1 #index for api accessing, looping through apis
     while strats['long'] == None:
+        save_strat(strats)
         hour = datetime.datetime.now(datetime.timezone(datetime.timedelta(0))).hour
-        if (hour==15 or hour == 16): interval = 0.3
-        elif (hour >= 14 and hour <20): interval=0.5
-        else: interval = 1
+        if (hour==15 or hour == 16): interval = 0.6
+        elif (hour >= 14 and hour <20): interval=1
+        else: interval = 2
         time.sleep(interval)
-        i = i+1 if i+1<len(API) else 0
-        try: strats = check_post(strats, API[i])
+        api = get_api(strats)
+        try: strats = check_post(strats, api)
         except: print(f"Error in checking YT with api [{i}] at time {get_current_time()}")
     return strats
-    
+
+def get_api(strats):
+    """
+    returns the next available api, keeping track of quota requirements
+    """
+    global API
+    ind = next((i for i, x in enumerate(strats['api_quotas']) if x), -1)
+    if ind == -1: 
+        strats['api_quotas'] = random.sample(range(8500, 9500), len(API))
+        ind = 0
+    strats['api_quotas'][ind] -= 1
+    return API[ind]
 
 def check_post(strats, api):
     """

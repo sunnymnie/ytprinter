@@ -1,32 +1,42 @@
 {
     "finished": 0,
-    "long": "SOLUSDT",
+    "long": null,
     "pair": {
-        "SOLUSDT": {
-            "pos": 1,
+        "ETHUSDT": {
+            "pos": 0,
+            "leverage": 3,
             "keywords": [
-                "sol",
-                "solana"
+                "omegadelta"
             ],
             "tp": {
                 "pos": 0,
-                "pct": 232.66754999999998,
-                "amt": 0.5
+                "pct": 99.0,
+                "amt": 1.0
             },
             "sl": {
                 "pos": 0,
-                "pct": 230.35244999999998
+                "pct": 0.99
             },
             "early": {
                 "pos": 0,
-                "time": 1638474726.546291,
+                "time": 9600,
                 "amt": 1.0
             },
             "late": {
                 "pos": 0,
-                "time": 1638481926.546291,
+                "time": 10200,
                 "amt": 1.0
             }
         }
-    }
+    },
+    "portfolio": [],
+    "leverage": 0.9,
+    "api_quotas": [
+        9015,
+        9082,
+        8599,
+        9158,
+        8705,
+        9454
+    ]
 }

@@ -32,7 +32,7 @@ def proofread_strat(strats):
     if strats['pair']: #Not empty
         strats['finished'] = 0 if (False in list(map(lambda x: strats['pair'][x]['pos']==-1, strats['pair']))) else 1
     else: strats['finished'] = 1
-    if strats['finished']: strat['long'] = None
+    if strats['finished']: strats['long'] = None
     return strats
 
 def json_editor():
@@ -58,8 +58,14 @@ def init_strats(strats):
     except: strats['finished'] = 0
     try: strats['long']
     except: strats['long'] = None
+    try: strats['leverage']
+    except: strats['leverage'] = 0.9
     try: strats['pair']
     except: strats['pair'] = {}
+    try: strats['portfolio']
+    except: strats['portfolio'] = []
+    try: strats['api_quotas']
+    except: strats['api_quotas'] = []
     save_strat(strats)
 
 def view_all_strats(strats):
@@ -69,10 +75,11 @@ def view_all_strats(strats):
     print("="*60)
     print(f"Finished = {strats['finished']}")
     print(f"Long     = {strats['long']}")
+    print(f"Leverage = {strats['leverage']}")
     for strat in strats['pair']:
         info = strats['pair'][strat]
         print("~"*60)
-        print(f"{strat}: pos = {info['pos']}")
+        print(f"{strat}: pos = {info['pos']}         leverage = {info['leverage']}")
         print("Keywords:")
         for keyword in info['keywords']:
             print(f"- {keyword}")
@@ -101,11 +108,13 @@ def add_strat(strats):
     early_time = int(input("Enter whole minutes for early time-stop (default 60)\n"))*60
     early_amt = float(input("Enter early time-stop amount (default 0.5)\n"))
     late_time = int(input("Enter whole minutes for late time-stop (default 180)\n"))*60
+    leverage = int(input("Enter int amount of leverage to use (default 20)\n"))
+
     tp = {'pos':0, 'pct':tp_pct, 'amt':tp_amt}
     sl = {'pos':0, 'pct':sl_pct}
     early = {'pos':0, 'time':early_time, 'amt':early_amt}
     late = {'pos':0, 'time':late_time, 'amt':1.0}
-    strats['pair'][asset] = {'pos':0, 'keywords':keywords, 'tp':tp, 'sl':sl, 'early':early, 'late':late}
+    strats['pair'][asset] = {'pos':0, 'leverage':leverage, 'keywords':keywords, 'tp':tp, 'sl':sl, 'early':early, 'late':late}
     strats['finished'] = 0
     save_strat(strats)
     print(f"{asset} strat successfully added")
@@ -122,6 +131,7 @@ def delete_strat(strats):
     strat = strat.upper()
     if strat in strats['pair']:
         if str(input(f"Are you sure you want to delete {strat}? [Y] to continue\n"))=="Y":
+            if strats['long'] == strat: strats['long'] = None
             del strats['pair'][strat]
             print(f"Successfully deleted strat {strat}")
         else: 
