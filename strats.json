@@ -4,7 +4,7 @@
     "pair": {
         "MATICUSDT": {
             "pos": 0,
-            "leverage": 20,
+            "leverage": 10,
             "keywords": [
                 "matic",
                 "polygon"
