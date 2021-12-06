@@ -27,7 +27,7 @@ def await_for_post(strats = None):
         time.sleep(interval)
         api = get_api(strats)
         try: strats = check_post(strats, api)
-        except: print(f"Error in checking YT with api [{i}] at time {get_current_time()}")
+        except: print(f"Error in checking YT with api at time {get_current_time()}")
     return strats
 
 def get_api(strats):
