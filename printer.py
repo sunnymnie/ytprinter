@@ -1,14 +1,10 @@
 from strategy import read_strat
 import youtube_checker as yc
 import portfolio_manager as pm
-import admin
 # import trader
 
 def main():
     # Update STRATS
-    if not admin.isUserAdmin():
-        admin.runAsAdmin()
-
     print("Starting printer...")
     strats = read_strat()
     while strats["finished"] == 0:

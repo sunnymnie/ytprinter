@@ -19,16 +19,13 @@ def TEST_get_latest_video_title(api):
     else:
         return ['33qre', '33qre', 'dfsaewfe', 'veqggrd', 'dfwq23f', 'fda3w2e', 'dfdfd2']
             
-
 def main():
-    if not admin.isUserAdmin():
-        admin.runAsAdmin()
-    print("running as admin...")
+    with open('strats1.json', 'w') as f:
+        pass
+def main2():
     strats = strategy.read_strat()
     print(os.path.isfile('strats.json'))
     strategy.save_strat(strats)
-    print(f"Is user admin? ---> {admin.isUserAdmin()}")
-    return input("enter to quit")
 
 def main1():
     API = keys.key('youtube', 'api')
