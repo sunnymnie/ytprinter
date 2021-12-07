@@ -1,5 +1,6 @@
 import json
 import os
+import uuid
 
 STRATS = 'strats.json'
 # Strats must have:
@@ -20,7 +21,6 @@ def save_strat(strat):
     """
     takes in json of the strat and saves it
     """
-    os.remove(STRATS)
     with open(STRATS, 'w') as f:
         json.dump(strat, f, indent=4)
 
