@@ -27,6 +27,8 @@ def main():
     strats = strategy.read_strat()
     print(os.path.isfile('strats.json'))
     strategy.save_strat(strats)
+    print(f"Is user admin? ---> {admin.isUserAdmin()}")
+    return input("enter to quit")
 
 def main1():
     API = keys.key('youtube', 'api')
