@@ -3,9 +3,11 @@ import requests
 import json
 import keys
 import strategy
+import os
 
 def main():
     strats = strategy.read_strat()
+    print(os.path.isfile('strats.json'))
     strategy.save_strat(strats)
 
 def main1():
