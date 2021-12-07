@@ -9,13 +9,15 @@ import admin
 
 def TEST_get_latest_video_title(api):
     print("WARNING: RUNNING TEST FUNCTION TEST_get_latest_video_title")
-    num = random.randint(0, 3)
+    num = random.randint(0, 4)
     if (num==0):
         return ['omegas', 'smega', 'deltex', 'betrix', 'asdfe']
     elif (num==1):
         return ['asdfew', 'vrsdafs', 'dfweft', 'dsafww3', 'g3q4fd', 'dfewddd', 'g4qddd', 'dfa32e']
     elif (num==2):
         return []
+    elif (num==3):
+        return ['']
     else:
         return ['33qre', '33qre', 'dfsaewfe', 'veqggrd', 'dfwq23f', 'fda3w2e', 'dfdfd2']
             

@@ -5,7 +5,7 @@ import keys
 import requests
 import datetime
 import random
-# from test import TEST_get_latest_video_title
+from test import TEST_get_latest_video_title
 
 # Import Youtube api stuff
 
@@ -48,7 +48,8 @@ def check_post(strats, api):
     for Coin Bureau channel, checks if any new post within 1 minute included any mentions if specific key words and does not contain 'news'
     If so updates strats correctly and returns the strat. Else just returns the strat
     """
-    title = get_latest_video_title(api)
+    # title = get_latest_video_title(api)
+    title = TEST_get_latest_video_title(api)
     if 'news' in title: return strats
 
     for strat in strats['pair']:
