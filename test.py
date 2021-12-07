@@ -5,6 +5,7 @@ import keys
 import strategy
 import os
 import random
+import admin
 
 def TEST_get_latest_video_title(api):
     print("WARNING: RUNNING TEST FUNCTION TEST_get_latest_video_title")
@@ -20,6 +21,9 @@ def TEST_get_latest_video_title(api):
             
 
 def main():
+    if not admin.isUserAdmin():
+        admin.runAsAdmin()
+    print("running as admin...")
     strats = strategy.read_strat()
     print(os.path.isfile('strats.json'))
     strategy.save_strat(strats)
