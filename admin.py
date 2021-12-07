@@ -21,7 +21,7 @@ def isUserAdmin():
 def runAsAdmin(cmdLine=None, wait=True):
 
     if os.name != 'nt':
-        print("This function is only implemented on Windows.")
+        print("Running on mac...")
         return
 
     import win32api, win32con, win32event, win32process
@@ -62,7 +62,7 @@ def runAsAdmin(cmdLine=None, wait=True):
         #print "Process handle %s returned code %s" % (procHandle, rc)
     else:
         rc = None
-
+    print("Running as admin...")
     return rc
 
 
