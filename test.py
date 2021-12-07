@@ -2,8 +2,13 @@ import youtube_checker as yc
 import requests
 import json
 import keys
+import strategy
 
 def main():
+    strats = strategy.read_strat()
+    strategy.save_strat(strats)
+
+def main1():
     API = keys.key('youtube', 'api')
     for i in range(len(API)):
         api = API[i]
