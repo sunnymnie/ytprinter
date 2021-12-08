@@ -81,7 +81,7 @@ def get_latest_video_title(api):
     title = response.json()['items'][0]['snippet']['title'].lower()
     if title != TITLE: 
         TITLE = title
-        print(f"New video detected at: {get_current_time()}")
+        print(f"New video detected at: {get_current_time()} --- TITLE: {title}")
     return str_to_list(title)
 
 
