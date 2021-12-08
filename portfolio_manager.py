@@ -31,7 +31,7 @@ def manage_position(strats, interval = 1):
 
         # TODO Buy on futures acount
         price = t.futures_long_trade(client, strats['long'], strats['pair'][strats['long']]['leverage'], usdt)
-        print(f"Going long {strats['long']} at {datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-8))).strftime('%H:%M:%S')}")
+        print(f"Going long {strats['long']} at {datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-8))).strftime('%H:%M:%S')} with price {str(price)}")
         strats = update_strats_with_price(strats, price)
         strats['pair'][strats['long']]['pos'] = 1
         strats['portfolio'] = portfolio
