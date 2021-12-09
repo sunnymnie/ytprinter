@@ -1,9 +1,9 @@
 {
     "finished": 0,
-    "long": "MATICUSDT",
+    "long": null,
     "pair": {
         "MATICUSDT": {
-            "pos": 1,
+            "pos": -1,
             "leverage": 20,
             "keywords": [
                 "matic",
@@ -15,8 +15,8 @@
                 "amt": 1.0
             },
             "sl": {
-                "pos": 0,
-                "pct": 2.1829925999999997
+                "pos": 1,
+                "pct": 2.1829925999999995
             },
             "early": {
                 "pos": 0,
@@ -104,7 +104,7 @@
         0,
         0,
         0,
-        8570,
+        8334,
         8865
     ]
 }
