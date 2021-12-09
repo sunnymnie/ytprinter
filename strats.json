@@ -1,9 +1,9 @@
 {
     "finished": 0,
-    "long": null,
+    "long": "MATICUSDT",
     "pair": {
         "MATICUSDT": {
-            "pos": 0,
+            "pos": 1,
             "leverage": 20,
             "keywords": [
                 "matic",
@@ -11,21 +11,21 @@
             ],
             "tp": {
                 "pos": 0,
-                "pct": 99.0,
+                "pct": 215.29926,
                 "amt": 1.0
             },
             "sl": {
                 "pos": 0,
-                "pct": 0.99
+                "pct": 2.1529925999999997
             },
             "early": {
                 "pos": 0,
-                "time": 10020,
+                "time": 1639077532.5092654,
                 "amt": 1.0
             },
             "late": {
                 "pos": 0,
-                "time": 90000,
+                "time": 1639157512.5092654,
                 "amt": 1.0
             }
         },
@@ -59,44 +59,52 @@
     "portfolio": [
         {
             "asset": "USDT",
-            "free": 4.36020306,
+            "free": 16.71806773,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 4.36020306
+            "netAsset": 16.71806773
         },
         {
-            "asset": "ATOM",
-            "free": 0.509592,
+            "asset": "DOT",
+            "free": 3.037808,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 0.509592
+            "netAsset": 3.037808
         },
         {
-            "asset": "ZEC",
-            "free": 7.8e-06,
+            "asset": "BTC",
+            "free": 0.00212803,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 7.8e-06
+            "netAsset": 0.00212803
         },
         {
-            "asset": "XMR",
-            "free": 1.892e-05,
+            "asset": "SOL",
+            "free": 0.569296,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 1.892e-05
+            "netAsset": 0.569296
+        },
+        {
+            "asset": "ETH",
+            "free": 0.02877696,
+            "locked": 0.0,
+            "borrowed": 0.0,
+            "interest": 0.0,
+            "netAsset": 0.02877696
         }
     ],
     "leverage": 0.8,
     "api_quotas": [
         0,
         0,
-        7629,
-        8910,
-        9054,
+        0,
+        0,
+        8570,
         8865
     ]
 }
