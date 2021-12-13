@@ -1,5 +1,29 @@
 # YTPrinter
 
+## Criterion
+- Does Coin Bureau own the coin?
+    - +1 if he does not
+    - 0 if he does
+    - -1 if he recently allocated to the coin
+- Is the market crashing?
+    - +4 if BTC price fell by >10% with big bottom liquidations
+    - +2 if BTC price fell by at most ~10% but no massive market liquidations
+    - 0 if seemingly in accumulation/distribution phase or gentle bull market
+- Did the coin have a substantial up-moves recently
+    - +3 if within the past 3 days the coin made substantial upmoves exceeding 30% and market was stationery or falling
+    - +2 if within the past 3 days the coin made substantial upmoves exceeding 15% and market was stationery or falling
+    - +1 if coin made upmoves exceeding 15% but market was also going up
+    - 0 otherwise
+- Is the coin ranked in the top by market cap
+    - +2 if within top 10 or 24h volume greater than 10% of BTCUSDT 24h volume
+    - +1 if within top 20 or 24h volume greater than 5% of BTCUSDT 24h volume
+    - 0 otherwise
+
+0-2: Stop loss + 3ish hour time stop
+3-5: Stop loss + 50% take profit at 2%+ 3ish hour time stop
+6-8: Stop loss + 100% take profit at 2% + 1ish hour time stop
+9+: Do not trade
+
 ## Buy immediately upon Coin Bureau's video launch
 
 ## TODO:
