@@ -1,57 +1,30 @@
 {
-    "finished": 1,
+    "finished": 0,
     "long": null,
     "pair": {
-        "MATICUSDT": {
-            "pos": -1,
+        "GALAUSDT": {
+            "pos": 0,
             "leverage": 20,
             "keywords": [
-                "matic",
-                "polygon"
+                "gala"
             ],
             "tp": {
                 "pos": 0,
-                "pct": 215.29926,
-                "amt": 1.0
+                "pct": 1.02,
+                "amt": 0.5
             },
             "sl": {
-                "pos": 1,
-                "pct": 2.1829925999999995
+                "pos": 0,
+                "pct": 0.99
             },
             "early": {
                 "pos": 0,
-                "time": 1639077532.5092654,
+                "time": 9900,
                 "amt": 1.0
             },
             "late": {
                 "pos": 0,
-                "time": 1639157512.5092654,
-                "amt": 1.0
-            }
-        },
-        "NEARUSDT": {
-            "pos": -1,
-            "leverage": 20,
-            "keywords": [
-                "near"
-            ],
-            "tp": {
-                "pos": 0,
-                "pct": 1098.7712999999999,
-                "amt": 1.0
-            },
-            "sl": {
-                "pos": 1,
-                "pct": 10.987713
-            },
-            "early": {
-                "pos": 0,
-                "time": 1639247486.6866584,
-                "amt": 1.0
-            },
-            "late": {
-                "pos": 0,
-                "time": 1639327466.6866584,
+                "time": 10200,
                 "amt": 1.0
             }
         }

@@ -50,7 +50,7 @@ def manage_position(strats, interval = 1):
 
         if (pair['tp']['pos']==0 and price>pair['tp']['pct']): #first time reaching tp
             print(f"Take profit activated at {datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-8))).strftime('%H:%M:%S')}")
-            t.futures_short_trade(client, strats['long'], pair['late']['amt']*amount)
+            t.futures_short_trade(client, strats['long'], pair['tp']['amt']*amount)
             strats['pair'][strats['long']]['tp']['pos'] = 1
             if pair['tp']['amt'] == 1:
                 t.transfer_futures_to_cross_margin(client)
@@ -66,7 +66,7 @@ def manage_position(strats, interval = 1):
         if (pair['early']['pos']==0 and now>pair['early']['time']):
             # Sell everything for long, then break
             print(f"Early time-stop activated at {datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-8))).strftime('%H:%M:%S')}")
-            t.futures_short_trade(client, strats['long'], pair['late']['amt']*amount)
+            t.futures_short_trade(client, strats['long'], pair['early']['amt']*amount)
             strats['pair'][strats['long']]['early']['pos'] = 1
             if pair['early']['amt'] == 1: 
                 t.transfer_futures_to_cross_margin(client)
