@@ -1,6 +1,6 @@
 {
     "finished": 0,
-    "long": null,
+    "long": "GALAUSDT",
     "pair": {
         "GALAUSDT": {
             "pos": 0,
@@ -89,11 +89,11 @@
     ],
     "leverage": 0.8,
     "api_quotas": [
-        0,
-        0,
-        0,
-        0,
-        1238,
-        9258
+        4062,
+        8671,
+        8726,
+        8634,
+        8871,
+        9030
     ]
 }
