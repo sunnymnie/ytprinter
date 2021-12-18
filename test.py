@@ -8,6 +8,7 @@ import random
 # import admin
 import time
 import random
+import binance_helpers as bh
 
 def TEST_get_latest_video_title(api):
     print("WARNING: RUNNING TEST FUNCTION TEST_get_latest_video_title")
@@ -34,14 +35,22 @@ def main2():
 def main1():
     API = keys.key('youtube', 'api')
     for i in range(len(API)):
+        time.sleep(random.randint(3,5))
         api = API[i]
         url = f'https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUqK_GSMbpiV8spgD3ZGloSw&key={api}&part=snippet&maxResults=1'
         response = requests.get(url)
-        print(f"======================================[{i}]=========================================")
-        print(response)
-        time.sleep(random.randint(3,5))
+        print(f"[{i}]: {response}")
 
+def main2():
+    client = bh.new_binance_client()
+    try:
+        client.futures_change_leverage(symbol='BTCUSDT', leverage=20)
+        print("Binance api + time setting works")
+    except BinanceAPIException as e:
+        print(e.message)
+        print("To solve: click windows button bottom left>settings>time and language>scroll down>additional time, date & regional settings>set the time and date>internet time tab>change settings and set with time.nist.gov and apply")
 
 if __name__ == "__main__":
     main1()
+    main2()
 else: print("WARNING: imported TEST module test.py")

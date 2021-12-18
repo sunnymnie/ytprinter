@@ -1,34 +1,7 @@
 {
-    "finished": 0,
-    "long": "GALAUSDT",
-    "pair": {
-        "GALAUSDT": {
-            "pos": 0,
-            "leverage": 20,
-            "keywords": [
-                "gala"
-            ],
-            "tp": {
-                "pos": 0,
-                "pct": 1.02,
-                "amt": 0.5
-            },
-            "sl": {
-                "pos": 0,
-                "pct": 0.99
-            },
-            "early": {
-                "pos": 0,
-                "time": 9900,
-                "amt": 1.0
-            },
-            "late": {
-                "pos": 0,
-                "time": 10200,
-                "amt": 1.0
-            }
-        }
-    },
+    "finished": 1,
+    "long": null,
+    "pair": {},
     "portfolio": [
         {
             "asset": "USDT",

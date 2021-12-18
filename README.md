@@ -27,9 +27,52 @@
 ## Buy immediately upon Coin Bureau's video launch
 
 ## TODO:
-- Decouple trader.py to trader.py and portfolio_manager.py.
-    - trader: can initialize margin buys/sells, transfers, future trading. 
-    - portfolio_manager: calls trader at the right times. Is in charge of logistics and interfacing with strats.json. 
+- add trade price to strats information
+- turn hard-coded tp/sl/time stops into a list of critical moments
+    - Every critical moment object has
+        - a type: time_stop, price_stop. 
+        - corresponding trigger price/time
+        - an uuid. Just so can easily reference it
+        - an amount of portfolio to sell as a float
+        - last changed time
+        - a list of triggers
+
+- a trigger object:
+    - a trigger. Is just a function that takes in current price + time and bought price + last changed time and returns boolean (function pointer)
+    - a list of saved paramaters in format [param1, param2, param3]
+    - a function pointer (somehow) to do an action at a time or price
+        - function takes in the critical moment object, the trigger uuid, the list of paramaters and changes the critical moment correspondinly and returns it
+    - an uuid. Just so can easily reference the trigger itself so it can change itself
+- a trigger function
+    - takes in a critical moment object, a trigger uuid, a list of paramaters. Returns a critical moment object
+    - caller function has to take returned critical moment's uuid and find original critical moment and delete it before putting it into the list in strats
+    - Some possible trigger functions
+        - if price is above buy price by x%, 
+An example of how I think it will work in Portfolio manager's POV
+```
+for cm in critical_moments:
+    if cm.liquidate(price and time):
+        liquidate(cm.amt, ...)          # Passing in exact amount of futures to liquidate, instead of float. Set when trade is instantiated
+        cm.finished = True or something
+    else:
+        new_cm = cm
+        for t in cm.triggers:
+            if t.trigger(price + time + bought price + last changed time):
+                new_cm = t.func(new_cm, t.uuid, t.params)
+        if (new_cm != cm):
+            del cm
+            critical_moments.append(new_cm)
+        
+    
+```
+
+## New functionality brainstorming:
+- futures buy and sells should utilize limit orders / waiting for price to come down for large orders in order to not drive up price. Also look at order book
+- migrate holding portfolio to spot portfolio. Reserve cross margin for manual trades involving margin
+
+
+- in strategy:
+    - in a check make sure that every uuid is different, else generate a new one
 - strats.json: keeps track of current margin portfolio as well. 
 - rename youtube_checker to strategy_manager. 
 - in strategy_manager, every time api list reaches end, instead of sleeping for x seconds, call portfolio_manager to do update on saving most recent % of portfolio + updating client 
