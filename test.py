@@ -9,6 +9,7 @@ import random
 import time
 import random
 import binance_helpers as bh
+from binance.exceptions import BinanceAPIException
 
 def TEST_get_latest_video_title(api):
     print("WARNING: RUNNING TEST FUNCTION TEST_get_latest_video_title")
