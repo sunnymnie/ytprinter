@@ -1,7 +1,64 @@
 {
-    "finished": 1,
+    "finished": 0,
     "long": null,
-    "pair": {},
+    "pair": {
+        "XLMUSDT": {
+            "pos": 0,
+            "leverage": 20,
+            "keywords": [
+                "xlm",
+                "stellar"
+            ],
+            "tp": {
+                "pos": 0,
+                "pct": 1.02,
+                "amt": 1.0
+            },
+            "sl": {
+                "pos": 0,
+                "pct": 0.99
+            },
+            "early": {
+                "pos": 0,
+                "time": 1200,
+                "amt": 0.5
+            },
+            "late": {
+                "pos": 0,
+                "time": 3600,
+                "amt": 1.0
+            }
+        },
+        "ATOMUSDT": {
+            "pos": 0,
+            "leverage": 20,
+            "keywords": [
+                "portfolio",
+                "bureau",
+                "holdings",
+                "coin"
+            ],
+            "tp": {
+                "pos": 0,
+                "pct": 1.05,
+                "amt": 0.5
+            },
+            "sl": {
+                "pos": 0,
+                "pct": 0.99
+            },
+            "early": {
+                "pos": 0,
+                "time": 3480,
+                "amt": 0.5
+            },
+            "late": {
+                "pos": 0,
+                "time": 10680,
+                "amt": 1.0
+            }
+        }
+    },
     "portfolio": [
         {
             "asset": "USDT",
