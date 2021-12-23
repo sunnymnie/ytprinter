@@ -3,7 +3,7 @@
     "long": null,
     "pair": {
         "XLMUSDT": {
-            "pos": 0,
+            "pos": -1,
             "leverage": 20,
             "keywords": [
                 "xlm",
@@ -11,21 +11,21 @@
             ],
             "tp": {
                 "pos": 0,
-                "pct": 1.02,
+                "pct": 0.2809998,
                 "amt": 1.0
             },
             "sl": {
                 "pos": 0,
-                "pct": 0.99
+                "pct": 0.2727351
             },
             "early": {
-                "pos": 0,
-                "time": 1200,
+                "pos": 1,
+                "time": 1640279033.1116214,
                 "amt": 0.5
             },
             "late": {
-                "pos": 0,
-                "time": 3600,
+                "pos": 1,
+                "time": 1640281433.1116214,
                 "amt": 1.0
             }
         },
@@ -61,69 +61,77 @@
     },
     "portfolio": [
         {
-            "asset": "USDT",
-            "free": 0.20134291,
-            "locked": 0.0,
-            "borrowed": 0.0,
-            "interest": 0.0,
-            "netAsset": 0.20134291
-        },
-        {
             "asset": "DOT",
-            "free": 2.61572,
+            "free": 1.584456,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 2.61572
+            "netAsset": 1.584456
         },
         {
             "asset": "BTC",
-            "free": 0.00183657,
+            "free": 0.00111465,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 0.00183657
+            "netAsset": 0.00111465
         },
         {
             "asset": "FTM",
-            "free": 29.976,
+            "free": 18.9616,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 29.976
+            "netAsset": 18.9616
+        },
+        {
+            "asset": "ONE",
+            "free": 0.06856,
+            "locked": 0.0,
+            "borrowed": 0.0,
+            "interest": 0.0,
+            "netAsset": 0.06856
         },
         {
             "asset": "ATOM",
-            "free": 1.921209,
+            "free": 1.160281,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 1.921209
+            "netAsset": 1.160281
         },
         {
             "asset": "SOL",
-            "free": 0.498904,
+            "free": 0.308664,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 0.498904
+            "netAsset": 0.308664
         },
         {
             "asset": "ETH",
-            "free": 0.0247572,
+            "free": 0.01494528,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 0.0247572
+            "netAsset": 0.01494528
+        },
+        {
+            "asset": "USDT",
+            "free": 62.68776727,
+            "locked": 0.0,
+            "borrowed": 0.0,
+            "interest": 0.0,
+            "netAsset": 62.68776727
         }
     ],
     "leverage": 0.8,
     "api_quotas": [
         0,
-        0,
-        0,
-        0,
-        0,
-        6983
+        1575,
+        8561,
+        9074,
+        8965,
+        9291
     ]
 }
