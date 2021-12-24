@@ -1,11 +1,11 @@
 {
-    "finished": 0,
+    "finished": 1,
     "long": null,
     "pair": {
         "ATOMUSDT": {
-            "pos": 0,
-            "price": null,
-            "time": null,
+            "pos": -1,
+            "price": 28.67989,
+            "time": 1640360996.7694957,
             "leverage": 20,
             "keywords": [
                 "coin",
@@ -32,7 +32,7 @@
                     "criterion": "plt",
                     "c_val": 0.99,
                     "amt": 1.0,
-                    "active": 1,
+                    "active": 0,
                     "triggers": [
                         {
                             "criterion": "pgt",
@@ -54,20 +54,68 @@
     },
     "portfolio": [
         {
-            "asset": "USDT",
-            "free": 51.39530135,
+            "asset": "DOT",
+            "free": 1.0736,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 51.39530135
+            "netAsset": 1.0736
+        },
+        {
+            "asset": "BTC",
+            "free": 0.00075405,
+            "locked": 0.0,
+            "borrowed": 0.0,
+            "interest": 0.0,
+            "netAsset": 0.00075405
+        },
+        {
+            "asset": "FTM",
+            "free": 12.952,
+            "locked": 0.0,
+            "borrowed": 0.0,
+            "interest": 0.0,
+            "netAsset": 12.952
+        },
+        {
+            "asset": "ATOM",
+            "free": 0.779657,
+            "locked": 0.0,
+            "borrowed": 0.0,
+            "interest": 0.0,
+            "netAsset": 0.779657
+        },
+        {
+            "asset": "SOL",
+            "free": 0.208504,
+            "locked": 0.0,
+            "borrowed": 0.0,
+            "interest": 0.0,
+            "netAsset": 0.208504
+        },
+        {
+            "asset": "ETH",
+            "free": 0.0101372,
+            "locked": 0.0,
+            "borrowed": 0.0,
+            "interest": 0.0,
+            "netAsset": 0.0101372
+        },
+        {
+            "asset": "USDT",
+            "free": 162.55057168,
+            "locked": 0.0,
+            "borrowed": 0.0,
+            "interest": 0.0,
+            "netAsset": 162.55057168
         }
     ],
     "leverage": 0.8,
     "api_quotas": [
         0,
-        1568,
-        8561,
-        9074,
+        0,
+        0,
+        2051,
         8965,
         9291
     ]
