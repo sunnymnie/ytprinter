@@ -2,7 +2,7 @@ from strategy import read_strat, save_strat, proofread_strat
 from binance.enums import * #https://github.com/sammchardy/python-binance/blob/master/binance/enums.py
 import binance_helpers as bh
 import time
-
+import threading
 
 def get_futures_price(client, pair):
     """returns futures price for pair"""
@@ -67,11 +67,14 @@ def liquidate_cross_margin_account(client, pairs):
     liquidates everything in cross margin account to USDT
     If cannot liquidate a particular pair, prints out warning and moves on
     """
+    threads = []
     for pair in pairs:
-        try:
-            _margin_order(client, f"{pair['asset']}USDT", 'SELL', float(pair['free']))
-        except:
-            print(f"Warning: failed to liquidate {pair['free']} {pair['asset']}USDT")
+        t = threading.Thread(target=margin_order, args=(client, f"{pair['asset']}USDT", 'SELL', float(pair['free'])))
+        threads.append(t)
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
 
 def cross_margin_long_trade(client, pair, amt):
     """goes long pair with amt in cross margin"""
@@ -82,9 +85,6 @@ def get_cross_margin_snapshot(client):
     portfolio = client.get_margin_account()
     portfolio = list(filter(lambda x: x['free'] != '0', portfolio['userAssets']))
     return [dict([a, _try_float(x)] for a, x in b.items()) for b in portfolio]
-
-
-
 
 
 def _try_float(x):
@@ -107,6 +107,14 @@ def update_strats_with_order(strats, price):
 
     save_strat(strats)
     return strats
+
+def margin_order(client, pair, side, amt, isolated='FALSE'):
+    """Safe margin order. Will print warning if failed"""
+    try:
+        return _margin_order(client, pair, side, amt, isolated)
+    except:
+        print(f"Warning: failed to liquidate {amt} {pair}USDT")
+
 
 def _margin_order(client, pair, side, amt, isolated='FALSE'):
     """
