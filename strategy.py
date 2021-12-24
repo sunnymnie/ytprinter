@@ -1,6 +1,7 @@
 import json
 import os
 import uuid
+import critical_moment as cm
 
 STRATS = 'strats.json'
 # Strats must have:
@@ -80,15 +81,14 @@ def view_all_strats(strats):
     for strat in strats['pair']:
         info = strats['pair'][strat]
         print("~"*60)
-        print(f"{strat}: pos = {info['pos']}         leverage = {info['leverage']}")
+        print(f"{strat}: pos = {info['pos']}         leverage = {info['leverage']}         price = {info['price']}")
         print("Keywords:")
         for keyword in info['keywords']:
             print(f"- {keyword}")
 
-        print(f"tp:     pos = {info['tp']['pos']}         pct = {info['tp']['pct']}           amt = {info['tp']['amt']}")
-        print(f"sl:     pos = {info['sl']['pos']}         pct = {info['sl']['pct']}")
-        print(f"early:  pos = {info['early']['pos']}         time = {int(info['early']['time']/60)} min         amt = {info['early']['amt']}")
-        print(f"late:   pos = {info['late']['pos']}         time = {int(info['late']['time']/60)} min")
+        print("Critical moments:")
+        for t in info['critical_moments']:
+            print(cm.critical_moment_to_str(t))
 
 def add_strat(strats):
     """
@@ -103,19 +103,49 @@ def add_strat(strats):
         else:
             keywords.append(word)
             print(f"Keywords: {keywords}")
-    tp_pct = float(input("Enter take profit price multiple (default 1.05)\n"))
-    tp_amt = float(input("Enter take profit amount (default 0.3)\n"))
-    sl_pct = float(input("Enter stop loss price multiple (default 0.995)\n"))
-    early_time = int(input("Enter whole minutes for early time-stop (default 60)\n"))*60
-    early_amt = float(input("Enter early time-stop amount (default 0.5)\n"))
-    late_time = int(input("Enter whole minutes for late time-stop (default 180)\n"))*60
+
+    critical_moments = [] 
+    while True:
+        while True:
+            crit = str(input(f"Choose {list(map(lambda x: x, cm.crit_dict))}. [h] to get definitions\n"))
+            if crit == "h": print(list(map(lambda x: f"{x}: {cm.crit_dict[x].__name__}", cm.crit_dict)))
+            elif cm.is_valid_criterion(crit): break
+            else: print(f"{crit} is not a valid criterion. Valid criterions are {list(map(lambda x: x, cm.crit_dict))}")
+
+        c_val = float(input(f"Input critical value. If price, input as percent (ie 1.02, 0.99), if time, input as seconds (ie 10000)\n"))
+        amt = float(input("Input amount to liquidate. Enter input as float (ie 1 for all, 0.5 for half of remaining)\n"))
+
+        triggers = []
+        while True:
+            print("Current triggers:")
+            for t in triggers:
+               print(cm.trigger_to_str(t))
+            if input("[q] to quit, [] enter to add triggers\n")=="q": break
+
+            while True:
+                tcrit = str(input(f"Choose from {list(map(lambda x: x, cm.crit_dict))} for Critical Moment trigger. [h] to get definitions\n"))
+                if tcrit == "h": print(list(map(lambda x: f"{x}: {cm.crit_dict[x].__name__}", cm.crit_dict)))
+                elif cm.is_valid_criterion(tcrit): break
+                else: print(f"{crit} is not a valid criterion. Valid criterions are {list(map(lambda x: x, cm.crit_dict))}")
+            
+            tc_val = float(input(f"Input critical value. If price, input as percent (ie 1.02, 0.99), if time, input as seconds (ie 10000)\n"))
+            while True:
+                func = str(input(f"Choose from {list(map(lambda x: x, cm.trig_dict))} for Trigger functions. [h] to get definitions\n"))
+                if func == "h": print(list(map(lambda x: f"{x}: {cm.trig_dict[x].__name__}", cm.trig_dict)))
+                elif cm.is_valid_func(func): break
+                else: print(f"{func} is not a valid trigger function. Valid functions are {list(map(lambda x: x, cm.trig_dict))}")
+
+            t = cm.new_trigger(tcrit, tc_val, func)
+            triggers.append(t)
+        
+        critical_moments.append(cm.new_critical_moment(crit, c_val, amt, triggers))
+        print(cm.critical_moment_to_str(critical_moments[-1]))
+        if input("[q] to quit, [] enter to keep adding critical moments\n")=="q": break
+
+     
     leverage = int(input("Enter int amount of leverage to use (default 20)\n"))
 
-    tp = {'pos':0, 'pct':tp_pct, 'amt':tp_amt}
-    sl = {'pos':0, 'pct':sl_pct}
-    early = {'pos':0, 'time':early_time, 'amt':early_amt}
-    late = {'pos':0, 'time':late_time, 'amt':1.0}
-    strats['pair'][asset] = {'pos':0, 'leverage':leverage, 'keywords':keywords, 'tp':tp, 'sl':sl, 'early':early, 'late':late}
+    strats['pair'][asset] = {'pos':0, 'price':None, 'time':None, 'leverage':leverage, 'keywords':keywords, 'critical_moments':critical_moments}
     strats['finished'] = 0
     save_strat(strats)
     print(f"{asset} strat successfully added")

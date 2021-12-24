@@ -79,8 +79,6 @@ for cm in critical_moments:
 
 ## SMALL TODOs:
 - If in portfolio_manager, put try catch on trader, if trader fails, refresh client, fetch state in portfolio_manager (updates strats to be same as information on binance), then calls trader again
-- In strategy strats set leverage to use
-- In strategy after a strat is submitted, print a summary (max loss, tp, sl, time stops,etc)
 - Discord capabilities. messenger.py
 
 # Past notes:

@@ -4,6 +4,7 @@ import time
 import trader as t
 import datetime
 import binance_helpers as bh
+import critical_moment as cm
 
 def manage_position(strats, interval = 1):
     """
@@ -33,53 +34,41 @@ def manage_position(strats, interval = 1):
         price = t.futures_long_trade(client, strats['long'], strats['pair'][strats['long']]['leverage'], usdt)
         print(f"Going long {strats['long']} at {datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-8))).strftime('%H:%M:%S')} with price {str(price)}")
         strats = update_strats_with_price(strats, price)
-        strats['pair'][strats['long']]['pos'] = 1
         strats['portfolio'] = portfolio
         save_strat(strats)
     
     amount = t.get_futures_holdings(client, strats['long'])
+    p_price = strats['pair'][strats['long']]['price']
+    p_time = strats['pair'][strats['long']]['time']
 
     while (strats['long'] != None):
         time.sleep(interval)
         pair = strats['pair'][strats['long']]
         if pair['pos'] != 1: return
-        if pair['sl']['pos'] == 1: break
 
         price = t.get_futures_price(client, strats['long'])
         now = time.time()
+        str_time = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-8))).strftime('%H:%M:%S')
 
-        if (pair['tp']['pos']==0 and price>pair['tp']['pct']): #first time reaching tp
-            print(f"Take profit activated at {datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-8))).strftime('%H:%M:%S')}")
-            t.futures_short_trade(client, strats['long'], pair['tp']['amt']*amount)
-            strats['pair'][strats['long']]['tp']['pos'] = 1
-            if pair['tp']['amt'] == 1:
-                t.transfer_futures_to_cross_margin(client)
-                strats = full_liquidate_strat(strats)
-        if (pair['sl']['pos']==0 and price<pair['sl']['pct']): #Hit stop loss, liquidate everything
-            # Sell everything
-            print(f"Stop loss activated at {datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-8))).strftime('%H:%M:%S')}")
-            t.futures_short_trade(client, strats['long'], amount)
-            strats['pair'][strats['long']]['sl']['pos'] = 1
-            t.transfer_futures_to_cross_margin(client)
-            strats = full_liquidate_strat(strats)
+        for c in pair['critical_moments']:
+            if c['active'] == 0: continue
+            if cm.crit_dict[c['criterion']](p_price, p_time, price, now, c['c_val']):
+                t.futures_short_trade(client, strats['long'], c['amt']*amount)
+                amount = t.get_futures_holdings(client, strats['long']) 
+                print(f"Sell {c['amt']} at {str_time}")
+                c['active'] = 0
+                if c['amt'] == 1:
+                    t.transfer_futures_to_cross_margin(client)
+                    strats = full_liquidate_strat(strats)
+                save_strat(strats)
+            else:
+                for trig in c['triggers']:
+                    if trig['active'] == 0: continue
+                    if cm.crit_dict[trig['criterion']](p_price, p_time, price, now, trig['c_val']):
+                        cm.trig_dict[trig['func']](p_price, p_time, price, now, trig, c)
+                        save_strat(strats)
+                        print(f"Modifiy trigger at {str_time}")
 
-        if (pair['early']['pos']==0 and now>pair['early']['time']):
-            # Sell everything for long, then break
-            print(f"Early time-stop activated at {datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-8))).strftime('%H:%M:%S')}")
-            t.futures_short_trade(client, strats['long'], pair['early']['amt']*amount)
-            strats['pair'][strats['long']]['early']['pos'] = 1
-            if pair['early']['amt'] == 1: 
-                t.transfer_futures_to_cross_margin(client)
-                strats = full_liquidate_strat(strats)
-        if (pair['late']['pos']==0 and now>pair['late']['time']):
-            # Sell everything for long, then break
-            print(f"Late time stop activated at {datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-8))).strftime('%H:%M:%S')}")
-            t.futures_short_trade(client, strats['long'], pair['late']['amt']*amount)
-            strats['pair'][strats['long']]['late']['pos'] = 1
-            t.transfer_futures_to_cross_margin(client)
-            strats = full_liquidate_strat(strats)
-
-        save_strat(strats)
     strats = proofread_strat(strats)
     save_strat(strats)
     return strats
@@ -124,10 +113,9 @@ def update_strats_with_price(strats, price):
     - updates buy price
     """
     now = time.time()
-    strats['pair'][strats['long']]['tp']['pct'] *= price
-    strats['pair'][strats['long']]['sl']['pct'] *= price
-    strats['pair'][strats['long']]['early']['time'] += now
-    strats['pair'][strats['long']]['late']['time'] += now
+    strats['pair'][strats['long']]['price'] = price
+    strats['pair'][strats['long']]['time'] = now
+    strats['pair'][strats['long']]['pos'] = 1
 
     return strats
 
