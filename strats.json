@@ -1,11 +1,11 @@
 {
-    "finished": 0,
+    "finished": 1,
     "long": null,
     "pair": {
         "LINKUSDT": {
-            "pos": 0,
-            "price": null,
-            "time": null,
+            "pos": -1,
+            "price": 20.16946,
+            "time": 1640878831.8698773,
             "leverage": 20,
             "keywords": [
                 "chainlink",
@@ -30,7 +30,7 @@
                     "criterion": "plt",
                     "c_val": 0.99,
                     "amt": 1.0,
-                    "active": 1,
+                    "active": 0,
                     "triggers": [
                         {
                             "criterion": "pgt",
@@ -53,59 +53,59 @@
     "portfolio": [
         {
             "asset": "DOT",
-            "free": 1.0736,
+            "free": 1.212304,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 1.0736
+            "netAsset": 1.212304
         },
         {
             "asset": "BTC",
-            "free": 0.00075405,
+            "free": 0.00085318,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 0.00075405
+            "netAsset": 0.00085318
         },
         {
             "asset": "FTM",
-            "free": 12.952,
+            "free": 14.9408,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 12.952
+            "netAsset": 14.9408
         },
         {
             "asset": "ATOM",
-            "free": 0.779657,
+            "free": 0.888609,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 0.779657
+            "netAsset": 0.888609
         },
         {
             "asset": "SOL",
-            "free": 0.208504,
+            "free": 0.23832,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 0.208504
+            "netAsset": 0.23832
         },
         {
             "asset": "ETH",
-            "free": 0.0101372,
+            "free": 0.01132816,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 0.0101372
+            "netAsset": 0.01132816
         },
         {
             "asset": "USDT",
-            "free": 162.55057168,
+            "free": 52.76101025,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 162.55057168
+            "netAsset": 52.76101025
         }
     ],
     "leverage": 0.8,
@@ -114,7 +114,7 @@
         0,
         0,
         0,
-        8421,
-        9069
+        0,
+        942
     ]
 }
