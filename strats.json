@@ -1,45 +1,12 @@
 {
     "finished": 0,
-    "long": "ADAUSDT",
+    "long": null,
     "pair": {
-        "ADAUSDT": {
-            "pos": 0,
-            "price": null,
-            "time": null,
-            "leverage": 50,
-            "keywords": [
-                "ada",
-                "cardano"
-            ],
-            "critical_moments": [
-                {
-                    "criterion": "pgt",
-                    "c_val": 1.01,
-                    "amt": 1.0,
-                    "active": 1,
-                    "triggers": []
-                },
-                {
-                    "criterion": "plt",
-                    "c_val": 0.995,
-                    "amt": 1.0,
-                    "active": 1,
-                    "triggers": [
-                        {
-                            "criterion": "tgt",
-                            "c_val": 60.0,
-                            "func": "be",
-                            "active": 1
-                        }
-                    ]
-                }
-            ]
-        },
         "XTZUSDT": {
             "pos": 0,
             "price": null,
             "time": null,
-            "leverage": 50,
+            "leverage": 20,
             "keywords": [
                 "tezos",
                 "xtz"
