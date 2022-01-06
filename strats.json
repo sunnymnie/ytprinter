@@ -1,6 +1,6 @@
 {
     "finished": 0,
-    "long": null,
+    "long": "ADAUSDT",
     "pair": {
         "ADAUSDT": {
             "pos": 0,
@@ -130,10 +130,10 @@
     "leverage": 0.8,
     "api_quotas": [
         0,
-        0,
-        3592,
-        8511,
-        9062,
-        9016
+        5572,
+        9434,
+        8628,
+        8517,
+        9008
     ]
 }
