@@ -1,15 +1,14 @@
 {
-    "finished": 1,
+    "finished": 0,
     "long": null,
     "pair": {
-        "XTZUSDT": {
-            "pos": -1,
-            "price": 4.2091,
-            "time": 1641570324.4000592,
+        "AAVEUSDT": {
+            "pos": 0,
+            "price": null,
+            "time": null,
             "leverage": 20,
             "keywords": [
-                "tezos",
-                "xtz"
+                "aave"
             ],
             "critical_moments": [
                 {
@@ -21,15 +20,15 @@
                 },
                 {
                     "criterion": "plt",
-                    "c_val": 1,
+                    "c_val": 0.995,
                     "amt": 1.0,
-                    "active": 0,
+                    "active": 1,
                     "triggers": [
                         {
                             "criterion": "tgt",
                             "c_val": 60.0,
                             "func": "be",
-                            "active": 0
+                            "active": 1
                         }
                     ]
                 }
