@@ -1,11 +1,11 @@
 {
-    "finished": 0,
+    "finished": 1,
     "long": null,
     "pair": {
         "XTZUSDT": {
-            "pos": 0,
-            "price": null,
-            "time": null,
+            "pos": -1,
+            "price": 4.2091,
+            "time": 1641570324.4000592,
             "leverage": 20,
             "keywords": [
                 "tezos",
@@ -21,15 +21,15 @@
                 },
                 {
                     "criterion": "plt",
-                    "c_val": 0.995,
+                    "c_val": 1,
                     "amt": 1.0,
-                    "active": 1,
+                    "active": 0,
                     "triggers": [
                         {
                             "criterion": "tgt",
                             "c_val": 60.0,
                             "func": "be",
-                            "active": 1
+                            "active": 0
                         }
                     ]
                 }
@@ -39,67 +39,67 @@
     "portfolio": [
         {
             "asset": "DOT",
-            "free": 1.212304,
+            "free": 0.941552,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 1.212304
+            "netAsset": 0.941552
         },
         {
             "asset": "BTC",
-            "free": 0.00085318,
+            "free": 0.00117224,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 0.00085318
+            "netAsset": 0.00117224
         },
         {
             "asset": "FTM",
-            "free": 14.9408,
+            "free": 11.932,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 14.9408
+            "netAsset": 11.932
         },
         {
             "asset": "ATOM",
-            "free": 0.888609,
+            "free": 0.698057,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 0.888609
+            "netAsset": 0.698057
         },
         {
             "asset": "SOL",
-            "free": 0.23832,
+            "free": 0.188176,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 0.23832
+            "netAsset": 0.188176
         },
         {
             "asset": "ETH",
-            "free": 0.01132816,
+            "free": 0.00882112,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 0.01132816
+            "netAsset": 0.00882112
         },
         {
             "asset": "USDT",
-            "free": 52.76101025,
+            "free": 23.45207254,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 52.76101025
+            "netAsset": 23.45207254
         }
     ],
     "leverage": 0.8,
     "api_quotas": [
         0,
-        5572,
-        9434,
-        8628,
+        0,
+        0,
+        7915,
         8517,
         9008
     ]
