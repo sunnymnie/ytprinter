@@ -1,5 +1,29 @@
 # YTPrinter
 
+## 3-pool-plan 
+
+|Info|Main|Gamble|Reserve|
+|---|---|---|---|
+|Medium| exodus and trezor/ledger | Binance (margin) and self-custory | Binance (spot) |
+|Purpose| Swing-trading, hodling. Copy Coin Bureau's trades| Leverage trading or risky bets | USDT |
+|Profits (>$200)| 100% retained | **if reserve < $5000**: 50% retained, 30% main, 20% reserve. **else**: 60% retained, 40% main | **if reserve <$3000**: 100% retained **else if reserve <$5000**: 50% main, 30% retained, 20% gamble **else**: 70% main, 30% gamble |
+
+## Goal/plan
+- Jan-30: Switch to using up to 50x 
+- Feb21-25 create version 2
+    - Adjusts to what is max leverage
+    - Buys as much as can in first 10 seconds, in small batches. $2000 at 20x, break even in first minute, liquidate in small batches as well. 
+- Apr1: reach $600-$100-$3000: ~$4000
+    - Reach enough in reserve to start moving funds to main and gamble
+    - Up until this point, reserve and main (binance portion) are the same. Hold BTC/ETH, etc and liquidate to go leveraged futures
+- May1: reach $1000-$100-$5000: ~$6000
+    - Reach max reserve. Excess earned in Binance is withdrawn. Reserve can still be mostly assets, but aim to permanently hold $1000 in USDT. 
+- Aug1: reach $5000-$2000-$5000: ~$12000
+    - Assuming minor appreciation. Reserve can still be mostly assets, but aim to permanently hold $2000 in USDT. 
+- Nov1: reach $10000-$3000-$5000: ~$18000
+    - Assuming some appreciation
+- Dec31: reach $35000-$5000-$5000 ~$1BTC ~$43000
+
 ## Criterion
 - Does Coin Bureau own the coin?
     - +1 if he does not
