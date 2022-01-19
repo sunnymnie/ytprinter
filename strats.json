@@ -1,26 +1,27 @@
 {
-    "finished": 1,
+    "finished": 0,
     "long": null,
     "pair": {
-        "AAVEUSDT": {
-            "pos": -1,
-            "price": 211.9062,
-            "time": 1642174680.7771251,
+        "AVAXUSDT": {
+            "pos": 0,
+            "price": null,
+            "time": null,
             "leverage": 20,
             "keywords": [
-                "aave"
+                "avax",
+                "avalanche"
             ],
             "critical_moments": [
                 {
                     "criterion": "pgt",
                     "c_val": 1.01,
                     "amt": 1.0,
-                    "active": 0,
+                    "active": 1,
                     "triggers": []
                 },
                 {
                     "criterion": "plt",
-                    "c_val": 1,
+                    "c_val": 0.995,
                     "amt": 1.0,
                     "active": 1,
                     "triggers": [
@@ -28,7 +29,7 @@
                             "criterion": "tgt",
                             "c_val": 60.0,
                             "func": "be",
-                            "active": 0
+                            "active": 1
                         }
                     ]
                 }
@@ -93,7 +94,7 @@
             "netAsset": 35.49706703
         }
     ],
-    "leverage": 0.8,
+    "leverage": 0.9,
     "api_quotas": [
         0,
         430,
