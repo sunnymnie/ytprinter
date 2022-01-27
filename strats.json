@@ -3,9 +3,9 @@
     "long": null,
     "pair": {
         "AVAXUSDT": {
-            "pos": 0,
-            "price": null,
-            "time": null,
+            "pos": -1,
+            "price": 65.3962,
+            "time": 1643124768.9912763,
             "leverage": 20,
             "keywords": [
                 "avax",
@@ -16,12 +16,12 @@
                     "criterion": "pgt",
                     "c_val": 1.01,
                     "amt": 1.0,
-                    "active": 1,
+                    "active": 0,
                     "triggers": []
                 },
                 {
                     "criterion": "plt",
-                    "c_val": 0.995,
+                    "c_val": 1,
                     "amt": 1.0,
                     "active": 1,
                     "triggers": [
@@ -29,7 +29,7 @@
                             "criterion": "tgt",
                             "c_val": 60.0,
                             "func": "be",
-                            "active": 1
+                            "active": 0
                         }
                     ]
                 }
@@ -72,59 +72,67 @@
     "portfolio": [
         {
             "asset": "DOT",
-            "free": 0.800912,
+            "free": 0.880208,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 0.800912
+            "netAsset": 0.880208
         },
         {
             "asset": "BTC",
-            "free": 0.00099145,
+            "free": 0.00104905,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 0.00099145
+            "netAsset": 0.00104905
         },
         {
             "asset": "FTM",
-            "free": 10.924,
+            "free": 12.9144,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 10.924
+            "netAsset": 12.9144
         },
         {
             "asset": "ATOM",
-            "free": 0.597585,
+            "free": 0.667057,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 0.597585
+            "netAsset": 0.667057
         },
         {
             "asset": "SOL",
-            "free": 0.168048,
+            "free": 0.187904,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 0.168048
+            "netAsset": 0.187904
+        },
+        {
+            "asset": "BNB",
+            "free": 0.00364658,
+            "locked": 0.0,
+            "borrowed": 0.0,
+            "interest": 0.0,
+            "netAsset": 0.00364658
         },
         {
             "asset": "ETH",
-            "free": 0.00751512,
+            "free": 0.01748947,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 0.00751512
+            "netAsset": 0.01748947
         },
         {
             "asset": "USDT",
-            "free": 35.49706703,
+            "free": 13.61163407,
             "locked": 0.0,
             "borrowed": 0.0,
             "interest": 0.0,
-            "netAsset": 35.49706703
+            "netAsset": 13.61163407
         }
     ],
     "leverage": 0.9,
@@ -133,7 +141,7 @@
         0,
         0,
         0,
-        0,
-        4945
+        834,
+        9223
     ]
 }
