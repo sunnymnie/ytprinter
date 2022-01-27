@@ -14,7 +14,7 @@
             "critical_moments": [
                 {
                     "criterion": "pgt",
-                    "c_val": 1.01,
+                    "c_val": 1.02,
                     "amt": 1.0,
                     "active": 1,
                     "triggers": []
